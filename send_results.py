@@ -1,4 +1,6 @@
-import os, bs4, requests, random
+import bs4
+import requests
+import random
 import smtplib
 
 
@@ -23,20 +25,22 @@ correct = sum(number in draw for number in my_numbers)
 
 my_numbers = (sorted(my_numbers))
 draw = (sorted(draw))
-total = f"Pogodio si {correct} od 7!"
+total = f"You have got {correct} out of 7!"
 
 try:
 	# Send result to email
-	conn = smtplib.SMTP('smtp.gmail.com', 587) # connect to email provider - this case - mailfence
+	conn = smtplib.SMTP('smtp.gmail.com', 587) # connect to email provider
 	conn.ehlo() # connect
 	conn.starttls() # start encryption
-	conn.login('psychobuddha.webdev@gmail.com', 'rimsxurwmbfruzhk') # login to account
-	conn.sendmail('psychobuddha.webdev@gmail.com', 'denisjovic@pm.me', f"'Subject: Loto results\n\n Moji brojevi: {my_numbers}\n Izvuceni brojevi: {draw}\n Rezultat: {total}'")
-	conn.sendmail('psychobuddha.webdev@gmail.com', 'denis.jovic@tn-tech.co.rs', f"'Subject: Loto results\n\n Moji brojevi: {my_numbers}\n Izvuceni brojevi: {draw}\n Rezultat: {total}'")
+	conn.login( 'email@gmail.com', 'yourpasswordhere') # login to account
+	conn.sendmail('email@gmail.com', 'target@email.com', f"'Subject: Loto results\n\n My numbers: {my_numbers}\n Official numbers: {draw}\n Result: {total}'")
 	conn.quit() # disconnect from the server
 	print("Success!")
 except:
 	print("Something went wrong with email sending")
+	
+# Set cron job to run the script twice a week, every Tuesday and Friday
+# TODO: make auto paymenta before the draw
 
 
 
