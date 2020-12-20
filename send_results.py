@@ -7,7 +7,7 @@ import smtplib
 response = requests.get('https://www.lutrija.rs/Results')
 soup = bs4.BeautifulSoup(response.text, "html.parser")
 
-# My generated numbers
+# Generate random numbers
 my_numbers = set()
 while len(my_numbers) < 7:
     my_numbers.add(random.randint(1, 40))
@@ -15,7 +15,6 @@ while len(my_numbers) < 7:
 # Numbers from the draw
 results = soup.find_all("div", "Rez_Brojevi_Txt_Gray")
 
-# Append numbers to the list
 draw = []
 for number in results[:7]:
 	draw.append(int(number.string))
@@ -39,8 +38,9 @@ try:
 except:
 	print("Something went wrong with email sending")
 	
-# Set cron job to run the script twice a week, every Tuesday and Friday
-# TODO: make auto paymenta before the draw
+	
+	
+# Cron job has been set to run the script twice a week, every Tuesday and Friday
 
 
 
